@@ -1,1 +1,303 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cotización - Plataforma de Gestión de Inventarios</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',sans-serif;background:linear-gradient(135deg,#0f4c5c,#0b7285);color:#333;line-height:1.6}
+.container{max-width:900px;margin:0 auto;padding:20px}
+.header,.section{background:#fff;padding:30px;border-radius:15px;box-shadow:0 10px 30px rgba(0,0,0,.15);margin-bottom:25px}
+.header{text-align:center}
+.header h1,.section h2{color:#0f4c5c}
+.section h2{border-bottom:3px solid #0f4c5c;padding-bottom:10px;margin-bottom:15px}
+.section h3{color:#0b7285;margin:20px 0 10px}
+.client-info,.highlight{background:#f8f9fa;padding:15px;border-radius:10px;margin-top:15px;text-align:left}
+.features-list{list-style:none}
+.features-list li{padding:15px;margin-bottom:15px;background:#f8f9fa;border-left:4px solid #0f4c5c;border-radius:8px}
+.module-header{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px}
+.module-title,.module-price{font-size:16px;font-weight:700;color:#0f4c5c}
+.badge{display:inline-block;background:#0f766e;color:#fff;font-size:12px;font-weight:600;padding:2px 10px;border-radius:20px;margin-left:8px;white-space:nowrap}
+.module-description{font-size:14px;color:#666}
+.deliverables{font-size:13px;color:#555;margin:8px 0 0 18px}
+.phase-total{display:flex;justify-content:space-between;background:#0f4c5c;color:#fff;padding:12px 15px;border-radius:8px;font-weight:700}
+table{width:100%;border-collapse:collapse}
+th,td{padding:12px;border-bottom:1px solid #ddd;text-align:left}
+th{background:#0f4c5c;color:#fff}
+.payment-terms{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px}
+.payment-card{background:linear-gradient(135deg,#0f4c5c,#0b7285);padding:20px;border-radius:10px;color:#fff;text-align:center}
+.amount{font-size:28px;font-weight:bold}
+.timeline{position:relative;padding-left:30px}
+.timeline::before{content:"";position:absolute;left:8px;top:0;height:100%;width:4px;background:#0f766e}
+.step{margin-bottom:22px;position:relative}
+.step::before{content:"";position:absolute;left:-30px;top:5px;width:18px;height:18px;background:#0f766e;border-radius:50%}
+.step.milestone::before{background:#f59f00}
+.footer{text-align:center;color:#fff;padding:20px}
+@media(max-width:768px){
+.container{padding:12px}
+.header,.section{padding:20px;border-radius:12px}
+.header h1{font-size:24px}.section h2{font-size:20px}
+.module-header{flex-direction:column;align-items:flex-start;gap:6px}
+.module-title,.module-price{font-size:15px}
+.module-description{font-size:13px}
+table{display:block;overflow-x:auto}
+th,td{min-width:110px;font-size:13px;padding:10px}
+.payment-terms{grid-template-columns:1fr}
+.amount{font-size:24px}
+.timeline{padding-left:25px}.timeline::before{left:6px}
+.step::before{width:14px;height:14px;left:-24px}
+.phase-total{flex-direction:column;gap:4px}
+}
+@media(max-width:480px){.header h1{font-size:20px}.section h2{font-size:18px}.header,.section{padding:16px}.amount{font-size:22px}}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <h1>📄 COTIZACIÓN COMERCIAL</h1>
+  <p>Plataforma web de gestión de inventarios (SaaS) y página de ventas de suscripciones</p>
+  <div class="client-info">
+    <p><b>Cliente:</b> <span id="cliente"></span></p>
+    <p><b>Proyecto:</b> Plataforma multiempresa de control de inventarios + Landing page de venta de suscripciones</p>
+    <p><b>Fecha:</b> <span id="fecha"></span></p>
+    <p><b>Validez:</b> 30 días</p>
+    <p><b>Duración estimada:</b> 18 semanas (≈ 4,5 meses) en 2 fases</p>
+  </div>
+</div>
+
+<div class="section">
+  <h2>📋 Descripción</h2>
+  <p>Desarrollo de una plataforma web por suscripción que permite a cualquier negocio controlar su inventario completo en un solo lugar: desde la <b>estructura física</b> (sedes, bodegas, zonas, estanterías y su capacidad), pasando por la <b>mercancía</b> (productos, lotes, existencias y movimientos), hasta la relación con <b>terceros</b> (proveedores, clientes y transportistas). Está pensada para negocios que hoy llevan su control en cuadernos u hojas de cálculo y necesitan una herramienta simple, ordenada y segura.</p>
+  <p style="margin-top:10px">Cada negocio accede con su propia cuenta y sus datos están completamente aislados de los demás (arquitectura multiempresa). El proyecto incluye además la <b>página web de ventas</b> con la que el dueño de la plataforma promociona el sistema, muestra sus planes y vende las suscripciones a los negocios interesados.</p>
+</div>
+
+<div class="section">
+  <h2>🎯 Alcance por módulo</h2>
+
+  <h3>Fase 1 — Núcleo del sistema + página de ventas (11 semanas)</h3>
+  <ul class="features-list">
+    <li>
+      <div class="module-header">
+        <span class="module-title">🏗 1. Base de la plataforma <span class="badge">Semanas 1–2</span></span>
+        <span class="module-price" data-precio="base"></span>
+      </div>
+      <div class="module-description">Arquitectura multiempresa con datos aislados por negocio, registro e inicio de sesión, recuperación de contraseña, usuarios por empresa, roles y permisos (administrador, operario, consulta) y registro de auditoría de acciones.</div>
+      <ul class="deliverables"><li>Registro de empresa y usuarios</li><li>Roles y permisos configurables</li><li>Bitácora de actividad</li><li>Ambiente en la nube con respaldos automáticos</li></ul>
+    </li>
+    <li>
+      <div class="module-header">
+        <span class="module-title">🏢 2. Estructura física y capacidad <span class="badge">Semanas 3–4</span></span>
+        <span class="module-price" data-precio="estructura"></span>
+      </div>
+      <div class="module-description">Modelado del espacio físico del negocio en niveles: sede → bodega → zona → estantería → ubicación. Cada nivel define su capacidad (unidades, peso o volumen) y el sistema muestra ocupación y espacio disponible.</div>
+      <ul class="deliverables"><li>Creación y edición de sedes, bodegas, zonas y ubicaciones</li><li>Capacidad máxima y porcentaje de ocupación</li><li>Vista de árbol de la estructura</li></ul>
+    </li>
+    <li>
+      <div class="module-header">
+        <span class="module-title">📦 3. Catálogo de mercancía <span class="badge">Semanas 5–6</span></span>
+        <span class="module-price" data-precio="mercancia"></span>
+      </div>
+      <div class="module-description">Registro de productos con código interno y de barras, categorías, unidad de medida, variantes (talla, color, presentación), control por lote y fecha de vencimiento, stock mínimo y fotos.</div>
+      <ul class="deliverables"><li>Productos, categorías y variantes</li><li>Lotes y vencimientos</li><li>Búsqueda y filtros avanzados</li><li>Estados activo/inactivo</li></ul>
+    </li>
+    <li>
+      <div class="module-header">
+        <span class="module-title">🔄 4. Movimientos y existencias <span class="badge">Semanas 7–8</span></span>
+        <span class="module-price" data-precio="movimientos"></span>
+      </div>
+      <div class="module-description">Registro de entradas, salidas, traslados entre ubicaciones y ajustes. Las existencias se calculan a partir de un historial de movimientos que no se puede alterar, evitando los descuadres típicos de las hojas de cálculo. Validación contra la capacidad de cada ubicación.</div>
+      <ul class="deliverables"><li>Entradas, salidas, traslados y ajustes</li><li>Kardex por producto y por ubicación</li><li>Existencias en tiempo real</li><li>Validación de capacidad al ubicar mercancía</li></ul>
+    </li>
+    <li>
+      <div class="module-header">
+        <span class="module-title">📥 5. Importación desde Excel <span class="badge">Semana 9</span></span>
+        <span class="module-price" data-precio="importacion"></span>
+      </div>
+      <div class="module-description">Herramienta para migrar la información que el negocio ya tiene en hojas de cálculo: plantillas descargables, carga masiva de productos, ubicaciones y existencias iniciales, con validación y reporte de errores antes de confirmar.</div>
+      <ul class="deliverables"><li>Plantillas Excel/CSV</li><li>Previsualización y detección de errores</li><li>Carga de inventario inicial</li></ul>
+    </li>
+    <li>
+      <div class="module-header">
+        <span class="module-title">🌐 6. Página de ventas de suscripciones (Landing) <span class="badge">Semanas 9–10 · en paralelo</span></span>
+        <span class="module-price" data-precio="landing"></span>
+      </div>
+      <div class="module-description">Sitio web de ventas del dueño de la plataforma, cuyo único objetivo es vender suscripciones al sistema. Presenta el producto a los negocios interesados (los que hoy usan cuadernos u hojas de cálculo), muestra los planes y precios y los lleva a suscribirse. No es una tienda ni una página para los clientes finales de cada negocio.</div>
+      <ul class="deliverables"><li>Propuesta de valor y funcionalidades pensadas para convencer al negocio comprador</li><li>Sección de planes y precios con botón "Suscribirme" conectado al registro y pago (módulo 9)</li><li>Solicitud de demo o prueba gratuita y formulario para captar interesados</li><li>Botón de WhatsApp y preguntas frecuentes</li><li>Diseño de marca básico (colores, tipografía, logo simple)</li><li>SEO básico y analítica para medir las visitas y conversiones</li><li>Dominio y certificado SSL configurados</li></ul>
+    </li>
+  </ul>
+  <div class="phase-total"><span>Total Fase 1</span><span data-total="fase1"></span></div>
+  <p style="margin-top:8px;font-size:13px;color:#666"><b>Hito:</b> al finalizar la semana 11 (revisión y ajustes) se entrega una versión funcional que ya permite a un negocio controlar su estructura, mercancía y movimientos.</p>
+
+  <h3 style="margin-top:30px">Fase 2 — Terceros, control y monetización (7 semanas)</h3>
+  <ul class="features-list">
+    <li>
+      <div class="module-header">
+        <span class="module-title">🤝 7. Terceros y órdenes de compra <span class="badge">Semanas 12–13</span></span>
+        <span class="module-price" data-precio="terceros"></span>
+      </div>
+      <div class="module-description">Gestión de proveedores, clientes y transportistas con datos de contacto, historial y productos asociados. Creación de órdenes de compra a proveedores, recepción de mercancía contra la orden (total o parcial) y envío de la orden por correo.</div>
+      <ul class="deliverables"><li>Directorio de terceros con historial</li><li>Órdenes de compra y estados</li><li>Recepción de mercancía vinculada al inventario</li></ul>
+    </li>
+    <li>
+      <div class="module-header">
+        <span class="module-title">📊 8. Alertas y reportes <span class="badge">Semanas 14–15</span></span>
+        <span class="module-price" data-precio="reportes"></span>
+      </div>
+      <div class="module-description">Panel de control con indicadores clave, alertas automáticas (stock mínimo, productos próximos a vencer, ubicaciones cerca de su capacidad) y reportes exportables a Excel y PDF.</div>
+      <ul class="deliverables"><li>Dashboard general</li><li>Alertas por correo y dentro de la plataforma</li><li>Reportes: existencias, movimientos, valorización, ocupación, rotación</li></ul>
+    </li>
+    <li>
+      <div class="module-header">
+        <span class="module-title">💳 9. Planes, suscripciones y cobros <span class="badge">Semanas 16–17</span></span>
+        <span class="module-price" data-precio="suscripciones"></span>
+      </div>
+      <div class="module-description">Sistema para vender el acceso: planes con límites (usuarios, productos, bodegas), periodo de prueba, cobro recurrente con pasarela de pagos (Wompi / Mercado Pago), suspensión automática por falta de pago y panel de super-administrador para gestionar todos los negocios clientes.</div>
+      <ul class="deliverables"><li>Planes y límites configurables</li><li>Pasarela de pagos integrada</li><li>Panel del dueño de la plataforma (empresas, planes, pagos)</li></ul>
+    </li>
+    <li>
+      <div class="module-header">
+        <span class="module-title">✅ 10. Pruebas, capacitación y entrega <span class="badge">Semana 18</span></span>
+        <span class="module-price" data-precio="cierre"></span>
+      </div>
+      <div class="module-description">Pruebas integrales, corrección de errores, capacitación funcional del equipo, manual de usuario básico y puesta en producción.</div>
+      <ul class="deliverables"><li>Pruebas con datos reales de un negocio piloto</li><li>Sesión de capacitación</li><li>Manual de usuario</li><li>30 días de soporte posterior a la entrega</li></ul>
+    </li>
+  </ul>
+  <div class="phase-total"><span>Total Fase 2</span><span data-total="fase2"></span></div>
+
+  <div class="phase-total" style="margin-top:20px;background:#0f766e;font-size:18px"><span>INVERSIÓN TOTAL (Fases 1 y 2)</span><span data-total="total"></span></div>
+</div>
+
+<div class="section">
+  <h2>📊 Valor de la solución</h2>
+  <table>
+    <thead><tr><th>Hoy (cuadernos / Excel)</th><th>Con la plataforma</th></tr></thead>
+    <tbody>
+      <tr><td>Datos dispersos en varios archivos o cuadernos</td><td>Información centralizada y accesible desde cualquier dispositivo</td></tr>
+      <tr><td>Errores de digitación y descuadres frecuentes</td><td>Movimientos registrados con historial inalterable</td></tr>
+      <tr><td>Sin idea clara del espacio disponible</td><td>Capacidad y ocupación por bodega, zona y ubicación</td></tr>
+      <tr><td>Se descubre tarde que algo se agotó o venció</td><td>Alertas automáticas de stock mínimo y vencimientos</td></tr>
+      <tr><td>Pedidos a proveedores por llamada o mensaje suelto</td><td>Órdenes de compra y directorio de terceros</td></tr>
+      <tr><td>Un solo usuario con acceso al archivo</td><td>Varios usuarios con roles y permisos</td></tr>
+    </tbody>
+  </table>
+  <div class="highlight">
+    <p><b>Modelo de negocio:</b> la plataforma está diseñada para venderse por suscripción mensual o anual. Cada nuevo negocio que se registra genera ingreso recurrente sin necesidad de desarrollo adicional, lo que convierte el sistema en un activo escalable.</p>
+  </div>
+</div>
+
+<div class="section">
+  <h2>💰 Propuestas comerciales</h2>
+  <div class="payment-terms">
+    <div class="payment-card"><small>Propuesta 1 · Por hitos</small><div class="amount" id="p1a"></div><p id="p1b"></p></div>
+    <div class="payment-card"><small>Propuesta 2 · Con cuotas</small><div class="amount" id="p2a"></div><p id="p2b"></p></div>
+  </div>
+  <p style="margin-top:12px;font-size:13px;color:#666">También es posible contratar únicamente la Fase 1 y continuar con la Fase 2 más adelante.</p>
+</div>
+
+<div class="section">
+  <h2>📅 Cronograma</h2>
+  <div class="timeline">
+    <div class="step"><b>Semanas 1–2</b><p>Base de la plataforma: multiempresa, usuarios, roles y auditoría.</p></div>
+    <div class="step"><b>Semanas 3–4</b><p>Estructura física y capacidad.</p></div>
+    <div class="step"><b>Semanas 5–6</b><p>Catálogo de mercancía.</p></div>
+    <div class="step"><b>Semanas 7–8</b><p>Movimientos y existencias.</p></div>
+    <div class="step"><b>Semanas 9–10</b><p>Importación desde Excel y página de ventas de suscripciones (en paralelo).</p></div>
+    <div class="step milestone"><b>Semana 11 · Hito Fase 1</b><p>Revisión, ajustes y entrega de la primera versión funcional.</p></div>
+    <div class="step"><b>Semanas 12–13</b><p>Terceros y órdenes de compra.</p></div>
+    <div class="step"><b>Semanas 14–15</b><p>Alertas y reportes.</p></div>
+    <div class="step"><b>Semanas 16–17</b><p>Planes, suscripciones y cobros.</p></div>
+    <div class="step milestone"><b>Semana 18 · Entrega final</b><p>Pruebas integrales, capacitación y puesta en producción.</p></div>
+  </div>
+  <p style="margin-top:8px;font-size:13px;color:#666">Los tiempos dependen de que el cliente entregue a tiempo la información y aprobaciones requeridas (logo, textos, definición de planes y precios).</p>
+</div>
+
+<div class="section">
+  <h2>🔮 Fuera de alcance (posibles fases futuras)</h2>
+  <ul style="padding-left:20px;line-height:1.9">
+    <li>Aplicación móvil nativa y escaneo de códigos con la cámara.</li>
+    <li>Integración con facturación electrónica DIAN.</li>
+    <li>Integración con tiendas en línea (Shopify, WooCommerce, etc.).</li>
+    <li>API pública para clientes y conexión con otros sistemas.</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2 class="section-title">📜 Términos y condiciones</h2>
+  <ul style="padding-left:20px;line-height:2">
+    <li>La cotización tiene validez de 30 días.</li>
+    <li>El proyecto inicia luego del pago inicial.</li>
+    <li>Incluye capacitación y 30 días de soporte posterior a la entrega.</li>
+    <li>Los costos de infraestructura (hosting, base de datos, dominio, correo) y las comisiones de la pasarela de pagos no están incluidos y corren por cuenta del cliente.</li>
+    <li>Cambios o funcionalidades fuera del alcance serán cotizados por separado y pueden modificar tiempos y costos.</li>
+    <li>Mantenimiento y soporte posterior a los 30 días se acuerdan aparte.</li>
+    <li>La titularidad del código y de la marca se define por escrito en el contrato de desarrollo.</li>
+  </ul>
+</div>
+
+<div class="footer">
+  <p><b>Ing. Darwin Solano | IDS Services</b></p>
+  <p>📧 darwinsolano2022@gmail.com</p>
+  <p>📱 +57 3166423014</p>
+  <p>Desarrollo Web | Software | Automatización y Big Data</p>
+</div>
+
+</div>
+
+<script>
+/* =========================================================
+   CONFIGURACIÓN: edita aquí los precios y el cliente.
+   Si un precio es 0 se muestra "Por definir".
+   Los totales y las propuestas se calculan solos.
+   ========================================================= */
+const CONFIG = {
+  cliente: "Por definir",
+  precios: {
+    base: 350000, estructura: 300000, mercancia: 300000, movimientos: 400000, importacion: 150000, landing: 250000,   // Fase 1 = 1.750.000
+    terceros: 300000, reportes: 250000, suscripciones: 500000, cierre: 200000                                          // Fase 2 = 1.250.000
+  },
+  inicialPct: 40,   // % inicial en la propuesta 2
+  cuotas: 6         // número de cuotas en la propuesta 2
+};
+
+const fase1 = ["base","estructura","mercancia","movimientos","importacion","landing"];
+const fase2 = ["terceros","reportes","suscripciones","cierre"];
+const cop = n => "$" + Math.round(n).toLocaleString("es-CO");
+const sum = keys => keys.reduce((a,k)=>a+(CONFIG.precios[k]||0),0);
+const show = n => n > 0 ? cop(n) : "Por definir";
+
+document.getElementById("cliente").textContent = CONFIG.cliente;
+document.getElementById("fecha").textContent = new Date().toLocaleDateString("es-CO",{year:"numeric",month:"long",day:"numeric"});
+
+document.querySelectorAll("[data-precio]").forEach(el=>{
+  el.textContent = show(CONFIG.precios[el.dataset.precio]||0);
+});
+
+const t1 = sum(fase1), t2 = sum(fase2), total = t1 + t2;
+document.querySelector('[data-total="fase1"]').textContent = show(t1);
+document.querySelector('[data-total="fase2"]').textContent = show(t2);
+document.querySelector('[data-total="total"]').textContent = show(total);
+
+if (total > 0) {
+  // Propuesta 1: 40% inicio, 30% entrega Fase 1, 30% entrega final
+  document.getElementById("p1a").textContent = cop(total);
+  document.getElementById("p1b").innerHTML =
+    "40% al iniciar: " + cop(total*0.4) + "<br>30% al entregar Fase 1: " + cop(total*0.3) + "<br>30% a la entrega final: " + cop(total*0.3);
+  // Propuesta 2: inicial + cuotas
+  const ini = total * CONFIG.inicialPct/100;
+  const cuota = (total - ini) / CONFIG.cuotas;
+  document.getElementById("p2a").textContent = cop(total);
+  document.getElementById("p2b").innerHTML =
+    CONFIG.inicialPct + "% inicial: " + cop(ini) + "<br>" + CONFIG.cuotas + " cuotas de " + cop(cuota);
+} else {
+  document.getElementById("p1a").textContent = "Por definir";
+  document.getElementById("p1b").innerHTML = "40% al iniciar<br>30% al entregar Fase 1<br>30% a la entrega final";
+  document.getElementById("p2a").textContent = "Por definir";
+  document.getElementById("p2b").innerHTML = CONFIG.inicialPct + "% inicial<br>" + CONFIG.cuotas + " cuotas iguales";
+}
+</script>
+</body>
+</html>
